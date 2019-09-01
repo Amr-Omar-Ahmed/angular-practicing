@@ -1,0 +1,30 @@
+{
+  "name": "Server",
+  "version": "1.0.0",
+  "description": "This project was generated with NodeJS version 12.8.0",
+  "main": "app.js",
+  "dependencies": {
+    "@hapi/joi": "^15.0.2",
+    "bcrypt": "^3.0.4",
+    "body-parser": "1.18.3",
+    "cors": "2.8.5",
+    "express": "4.16.4",
+    "joi-objectid": "^2.0.0",
+    "jsonwebtoken": "8.4.0",
+    "mongoose": "5.4.3"
+  },
+  "devDependencies": {
+    "nodemon": "1.18.8"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js",
+    "debug": "nodemon --inspect"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "engines": {
+    "node": "10.15.3"
+  }
+}

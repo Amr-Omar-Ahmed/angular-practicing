@@ -1,0 +1,204 @@
+<div class="container">
+    <div class="row ">
+        <div class="col">
+            <div class="card mt-5 mb-5  p-1">
+                <form [formGroup]="signupFrom " class="card-body" (ngSubmit)="signup()">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="fullName">Full Name</label>
+                        <div class="col-sm-8">
+
+                            <input id="fullName" [ngClass]="{'is-invalid': formErrors.fullName}" type="text"
+                                class="form-control" formControlName="fullName" (blur)="logValidationErrors()">
+                            <span class="invalid-feedback" *ngIf="formErrors.fullName">
+                                {{formErrors.fullName}}
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Contact Perfrence</label>
+                        <div class="col-md-8">
+                            <label class="radio-inline">
+                                <input type="radio" value="email" formControlName="contactPreference" class="mr-1">
+                                <span class="pr-2">
+                                    Email
+                                </span>
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" value="phone" formControlName="contactPreference" class="mr-1">
+                                <span class="pr-2">
+                                    Phone
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+
+
+                    <div formGroupName="emailGroup">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="email">Email</label>
+                            <div class="col-sm-8">
+                                <input id="email" [ngClass]="{'is-invalid': formErrors.email}" type="text"
+                                    class="form-control" formControlName="email" (blur)="logValidationErrors()">
+                                <span class="invalid-feedback" *ngIf="formErrors.email">
+                                    {{formErrors.email}}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="confirmEmail">ConfirmEmail</label>
+                            <div class="col-sm-8">
+                                <input id="confirmEmail"
+                                    [ngClass]="{'is-invalid': formErrors.confirmEmail || formErrors.emailGroup }"
+                                    type="text" class="form-control" formControlName="confirmEmail"
+                                    (blur)="logValidationErrors()">
+                                <span class="invalid-feedback" *ngIf="formErrors.confirmEmail || formErrors.emailGroup">
+                                    {{formErrors.confirmEmail ? formErrors.confirmEmail :formErrors.emailGroup}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="phone">Phone</label>
+                        <div class="col-sm-8">
+                            <input id="phone" [ngClass]="{'is-invalid': formErrors.phone}" type="text"
+                                class="form-control" formControlName="phone" (blur)="logValidationErrors()">
+                            <span class=" invalid-feedback" *ngIf="formErrors.phone">
+                                {{formErrors.phone}}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="password">password</label>
+                        <div class="col-sm-8">
+                            <input id="password" [ngClass]="{'is-invalid': formErrors.password}" type="text"
+                                class="form-control" formControlName="password" (blur)="logValidationErrors()">
+                            <span class=" invalid-feedback" *ngIf="formErrors.password">
+                                {{formErrors.password}}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="card mb-3 badge-light">
+                        <div style="text-align: left;margin: 10px;">
+                            <button class="btn btn-primary offset-2 p-1 m-1" (click)="addSkillBtnHandler()"
+                                [disabled]="skills.invalid || skills.controls.length ==3">
+                                Add skill
+                            </button>
+
+                        </div>
+                        <div formArrayName="skills" *ngFor="let skill of skills.controls; let i =index">
+                            <hr *ngIf="i>0">
+                            <div [formGroupName]="i">
+                                <div class="form-group ">
+                                    <label class="col-sm-2 control-label" [attr.for]="'skillName'+i">
+                                        Skill
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control"
+                                            [ngClass]="{'is-invalid': skill.get('skillName').invalid && skill.get('skillName').touched}"
+                                            [id]="'skillName'+i" formControlName="skillName"
+                                            placeholder="C#, Java, Angular etc...">
+                                        <span class="invalid-feedback"
+                                            *ngIf="!!skill.get('skillName')?.errors?.required && skill.get('skillName').touched">
+                                            skill name is required.
+                                        </span>
+                                    </div>
+                                    <div style="display: flex; float: right;margin-right: 200px"
+                                        *ngIf="skills.controls.length>1">
+                                        <button type="button" class="btn btn-danger "
+                                            (click)="removeSkillButtonHandler(i)">
+                                            <i class="fas fa-times-circle"></i> </button>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" [attr.for]="'experienceInYears'+i">
+                                        Experience
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <input type="text"
+                                            [ngClass]="{'is-invalid': skill.get('experienceInYears').invalid && skill.get('experienceInYears').touched}"
+                                            class="form-control" [id]="'experienceInYears'+i"
+                                            formControlName="experienceInYears" placeholder="In Years"
+                                            (blur)="logValidationErrors()">
+                                        <div class="invalid-feedback"
+                                            *ngIf="!!skill.get('experienceInYears').errors?.required && skill.get('experienceInYears').touched">
+                                            experienceInYears is required.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Proficiency</label>
+                                    <div class="col-md-8">
+                                        <label class="radio-inline">
+                                            <input type="radio"
+                                                [ngClass]="{'is-invalid': skill.get('proficiency').invalid && skill.get('proficiency').touched}"
+                                                value="beginner" formControlName="proficiency" class="mr-1">
+                                            <span class="pr-2">
+                                                Beginner
+                                            </span>
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio"
+                                                [ngClass]="{'is-invalid': skill.get('proficiency').invalid && skill.get('proficiency').touched}"
+                                                value="intermediate" formControlName="proficiency" class="mr-1">
+                                            <span class="pr-2">
+                                                Intermediate
+                                            </span>
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio"
+                                                [ngClass]="{'is-invalid': skill.get('proficiency').invalid && skill.get('proficiency').touched}"
+                                                value="advanced" formControlName="proficiency" class="mr-1">
+                                            <span class="pr-2">
+                                                Advanced
+                                            </span>
+                                        </label>
+                                        <div class="invalid-feedback" *ngIf="!!skill.get('proficiency').errors?.required &&
+                                        skill.get('proficiency').touched">
+                                            Proficiency is required
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="text-align: center">
+                        <button class="btn btn-primary w-25 p-1 m-1" [disabled]="signupFrom.invalid">
+                            Sign up
+                        </button>
+                        <a [routerLink]="['/login']" class="btn btn-success  w-25">
+                            already have account
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 
+<table border="1">
+    <tr>
+        <th style="padding: 10px">FormGroup</th>
+        <th style="padding: 10px">FormControl (fullName)</th>
+    </tr>
+    <tr>
+        <td style="padding: 10px">
+            touched : {{ signupFrom.touched }}
+            <br /> dirty : {{ signupFrom.dirty }}
+            <br /> valid : {{ signupFrom.valid }}
+            <br /> invalid : {{ signupFrom.invalid }}
+            <br /> Form Values : {{signupFrom.value | json}}
+        </td>
+        <td style="padding: 10px">
+            touched : {{ signupFrom.get('fullName').touched }}
+            <br /> dirty : {{ signupFrom.get('fullName').dirty }}
+            <br /> valid : {{ signupFrom.get('fullName').valid }}
+            <br /> FullName Value : {{signupFrom.get('fullName').value}}
+        </td>
+    </tr>
+</table> -->

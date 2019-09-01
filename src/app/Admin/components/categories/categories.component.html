@@ -1,0 +1,40 @@
+<app-search serachBtnColor='#ffc107'></app-search>
+
+<!-- CATEGORIES -->
+<section id="categories">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Latest Categories</h4>
+                    </div>
+                    <table class="table table-striped">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>#</th>
+                                <th>Title</th>
+                                <th>Date</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let cat of categories">
+                                <td>{{cat.id}}</td>
+                                <td>{{cat.title}}</td>
+                                <td>{{cat.date}}</td>
+                                <td>
+                                    <a [routerLink]="['/admin/details']" [queryParams]="{categoryId:cat.id}"
+                                        fragment="loading" class="btn btn-secondary">
+                                        <i class="fas fa-angle-double-right"></i> Details
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

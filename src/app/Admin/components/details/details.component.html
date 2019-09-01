@@ -1,0 +1,199 @@
+<form [formGroup]="form" (ngSubmit)="updateCategory()" class="needs-validation" novalidate>
+    <!-- ACTIONS -->
+    <section id="actions" class="py-4 mb-4 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <a [routerLink]="['/admin/categories']" class="btn btn-light btn-block">
+                        <i class="fas fa-arrow-left"></i> Back To Dashboard
+                    </a>
+                </div>
+                <!-- <div class="col-md-3">
+                    <button class="btn btn-success btn-block" type="submit">
+                        <i class="fas fa-check"></i> Save Changes
+                    </button>
+                </div> -->
+                <div class="col-md-3">
+                    <button class="btn btn-danger btn-block" (click)="disableForm()">
+                        <i class="fas fa-trash"></i> Disable All fields
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DETAILS -->
+    <section id="details">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Edit Post</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="title">Title</label>
+                                <input type="text" class="form-control" [ngClass]="{'is-invalid': checkValidity(title)}"
+                                    formControlName="title">
+                                <div class="invalid-feedback" *ngIf="!!title?.errors?.required">
+                                    Please choose a title.
+                                </div>
+                                <div class="invalid-feedback"
+                                    *ngIf="!!title?.errors?.minlength.requiredLength || !!title?.errors?.maxlength.requiredLength">
+                                    title should be from 3 to 10 characters
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="date">Date</label>
+                                <input type="date" class="form-control" [ngClass]="{'is-invalid': checkValidity(date)}"
+                                    formControlName="date">
+                            </div>
+                            <div formGroupName="categoryData">
+                                <div class="form-group">
+                                    <label for="type">Type</label>
+                                    <input type="text" class="form-control"
+                                        [ngClass]="{'is-invalid': checkValidity(type)}" formControlName="type">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="avgPrice">Avg Price</label>
+                                    <input type="number" class="form-control"
+                                        [ngClass]="{'is-invalid': checkValidity(avgPrice)}" formControlName="avgPrice">
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">rate</label>
+                                    <div class="col-md-8">
+                                        <input id="rate" class="mr-2" type="radio" value="good"
+                                            formControlName="rate">Good
+                                        <input id="rate" class="mr-2" type="radio" value="intermediate"
+                                            formControlName="rate">Intermediate
+                                        <input id="rate" class="mr-2" type="radio" value="perfect"
+                                            formControlName="rate">perfect
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="body">body</label>
+                                <textarea class="form-control"
+                                    [ngClass]="{'is-invalid': body?.errors?.maxlength.requiredLength}"
+                                    formControlName="body"></textarea>
+                                <label for="">{{maxBodyCharchterLength}}</label>
+                                <div class="invalid-feedback" *ngIf="!!body?.errors?.maxlength.requiredLength">
+                                    body can't be more than 10 characters
+                                </div>
+                            </div>
+
+                            <!-- <div class="form-group">
+                                <label for="category">Category</label>
+                                <select class="form-control">
+                                    <option value="" selected>Web Development</option>
+                                    <option value="">Tech Gadgets</option>
+                                    <option value="">Business</option>
+                                    <option value="">Health & Wellness</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="image">Upload Image</label>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="image">
+                                    <label for="image" class="custom-file-label">Choose File</label>
+                                </div>
+                                <small class="form-text text-muted">Max Size 3mb</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="body">Body</label>
+                                <textarea id="editor1"
+                                    class="form-control">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat culpa nam cumque voluptatum. Possimus recusandae porro architecto officiis illo dignissimos ratione aut officia reprehenderit! Iure cum numquam fugit doloremque quis ullam illo odit, odio voluptates non quisquam laboriosam consectetur quasi perspiciatis! Sapiente minus aperiam nobis molestias autem ut praesentium laudantium?</textarea>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</form>
+<!-- <div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Edit Post</h4>
+                </div>
+                <div class="card-body">
+                    <form class="needs-validation" novalidate>
+                        <div class="form-row">
+                            <div class="col-md-4 mb-3">
+                                <label for="validationCustom01">First name</label>
+                                <input type="text" class="form-control" id="validationCustom01" placeholder="First name"
+                                    value="Mark" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="validationCustom02">Last name</label>
+                                <input type="text" class="form-control" id="validationCustom02" placeholder="Last name"
+                                    value="Otto" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="validationCustomUsername">Username</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroupPrepend">@</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="validationCustomUsername"
+                                        placeholder="Username" aria-describedby="inputGroupPrepend" required>
+                                    <div class="invalid-feedback">
+                                        Please choose a username.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <label for="validationCustom03">City</label>
+                                <input type="text" class="form-control" id="validationCustom03" placeholder="City"
+                                    required>
+                                <div class="invalid-feedback">
+                                    Please provide a valid city.
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="validationCustom04">State</label>
+                                <input type="text" class="form-control" id="validationCustom04" placeholder="State"
+                                    required>
+                                <div class="invalid-feedback">
+                                    Please provide a valid state.
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="validationCustom05">Zip</label>
+                                <input type="text" class="form-control" id="validationCustom05" placeholder="Zip"
+                                    required>
+                                <div class="invalid-feedback">
+                                    Please provide a valid zip.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                                <label class="form-check-label" for="invalidCheck">
+                                    Agree to terms and conditions
+                                </label>
+                                <div class="invalid-feedback">
+                                    You must agree before submitting.
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" type="submit">Submit form</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->

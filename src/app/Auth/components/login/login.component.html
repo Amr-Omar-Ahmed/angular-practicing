@@ -1,0 +1,52 @@
+<!-- ACTIONS -->
+<section id="actions" class="py-4 mb-4 bg-light">
+    <div class="container">
+        <div class="row">
+
+        </div>
+    </div>
+</section>
+
+<!-- LOGIN -->
+<section id="login" style="margin-top: 89px">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Account Login</h4>
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]="loginForm" (ngSubmit)="login()">
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="text"
+                                    [ngClass]="{'is-invalid': loginForm.get('email').invalid && loginForm.get('email').touched}"
+                                    class="form-control" formControlName="email">
+                                <div class="invalid-feedback" *ngIf="!!loginForm.get('email').errors?.required &&
+                                loginForm.get('email').touched">
+                                    email is required
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password"
+                                    [ngClass]="{'is-invalid': loginForm.get('password').invalid && loginForm.get('password').touched}"
+                                    class="form-control" formControlName="password">
+                                <div class="invalid-feedback" *ngIf="!!loginForm.get('password').errors?.required &&
+                                loginForm.get('password').touched">
+                                    password is required
+                                </div>
+                            </div>
+                            <button type="submit" [disabled]="loginForm.invalid"
+                                class="btn btn-primary btn-block">Login</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div style="height: 70px">
+
+</div>
