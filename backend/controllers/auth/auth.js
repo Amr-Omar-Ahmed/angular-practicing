@@ -21,7 +21,7 @@ exports.signup = async (req, res, next) => {
 		res.status(201).json({
 			message: 'تم التسجيل بنجاح',
 			token: token,
-			userId: user._id,
+			fullName: user.fullName,
 			expiresIn: 36000,
 		});
 	} catch (err) {
@@ -44,7 +44,7 @@ exports.login = async (req, res, next) => {
 			message: 'Authentication is successful',
 			token: token,
 			expiresIn: 36000,
-			inActive: user.inActive
+			fullName: user.fullName,
 		});
 	} catch (error) {
 		next(new ApiError('يوجد خطأ في التليفون او كلمة السر', 401));

@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, EventEmitter, Output } from "@angular/core";
 import { User } from 'src/app/Shared/models/user.model';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError, Subject } from 'rxjs';
@@ -15,12 +15,18 @@ const baseHeaders = {
 @Injectable()
 export class AuthService {
   private authStatusListener = new Subject<boolean>();
+  @Output() userNameListener = new EventEmitter<string>();
   private Token: string;
   private tokenTimer: any;
   private isAuthenticated = false;
+  private userName: string;
   baseUrl = environment.baseURL;
-  constructor(private httpClient: HttpClient, private router: Router) {
+  constructor(private httpClient: HttpClient, private router: Router) { }
+
+  userNameChenged(userName) {
+    this.userNameListener.emit(userName)
   }
+
 
   signup(user: User): Observable<User> {
     return this.httpClient.post<User>(`${this.baseUrl}auth/signup`, user, baseHeaders)
@@ -43,10 +49,12 @@ export class AuthService {
             const expiresInDuration = response.expiresIn;
             this.setAuthTimer(expiresInDuration);
             this.isAuthenticated = true;
+            this.userName = response.fullName;
+            this.userNameChenged(this.userName)
             this.authStatusListener.next(true);
             const now = new Date();
             const expirationDate = new Date(now.getTime() + expiresInDuration * 1000);
-            this.saveAuthData(token, expirationDate);
+            this.saveAuthData(token, expirationDate, this.userName);
           }
           this.router.navigate(["/admin"]);
           return response;
@@ -105,25 +113,35 @@ export class AuthService {
     }
   }
 
-  private saveAuthData(token: string, expirationDate: Date) {
+  private saveAuthData(token: string, expirationDate: Date, userName: string) {
     localStorage.setItem("token", token);
     localStorage.setItem("expiration", expirationDate.toISOString());
+    localStorage.setItem("userName", userName);
   }
 
   private clearAuthData() {
     localStorage.removeItem("token");
     localStorage.removeItem("expiration");
+    localStorage.removeItem("userName");
+  }
+
+  getUserName() {
+    debugger;
+    return this.userName;
   }
 
   private getAuthData() {
     const token = localStorage.getItem("token");
     const expirationDate = localStorage.getItem("expiration");
+    const userName = localStorage.getItem("userName");
     if (!token || !expirationDate) {
       return;
     }
     return {
-      token: token,
+      token,
       expirationDate: new Date(expirationDate),
+      userName
+
     }
   }
 }

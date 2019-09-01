@@ -8,11 +8,13 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
   @Input() isAuthenticated: boolean;
-
+  userName: string;
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
-
+    this.authService.userNameListener.subscribe((user: string) => {
+      this.userName = user
+    })
   }
 
   logout() {
