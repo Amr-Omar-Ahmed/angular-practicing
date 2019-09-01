@@ -127,7 +127,8 @@ export class AuthService {
 
   getUserName() {
     debugger;
-    return this.userName;
+    const userName = localStorage.getItem("userName");
+    return userName != '' ? userName : '';
   }
 
   private getAuthData() {
