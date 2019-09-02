@@ -3,7 +3,6 @@ const ApiError = require('../../helpers/ApiError');
 const { User } = require('../../models/user');
 
 exports.signup = async (req, res, next) => {
-	debugger;
 	console.log(req.body);
 	const { fullName, contactPreference, emailGroup: { email }, password, phone, skills } = req.body;
 	let user = new User({

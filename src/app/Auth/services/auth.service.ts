@@ -126,7 +126,6 @@ export class AuthService {
   }
 
   getUserName() {
-    debugger;
     const userName = localStorage.getItem("userName");
     return userName != '' ? userName : '';
   }
