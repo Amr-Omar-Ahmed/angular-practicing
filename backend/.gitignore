@@ -1,5 +1,3 @@
 # .gitignore
 /node_modules
-/config/dev
-dev.js
 /dist
