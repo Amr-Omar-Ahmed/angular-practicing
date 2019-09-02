@@ -1,6 +1,6 @@
 <!-- HEADER -->
 <header id="main-header" class="py-2  text-white" *ngIf="isAuthenticated" [ngClass]="{'bg-primary': componentName=='Dashboard' ||  componentName=='Posts' ||  componentName=='Details',
-'bg-success':componentName=='Users' ,'bg-warning':componentName=='Categories'}">
+'bg-success':componentName=='Users' ,'bg-warning':componentName=='Categories' || componentName=='Servers'}">
     <div class="container">
         <div class="row">
             <div class="col-md-6">

@@ -1,9 +1,7 @@
 import { Injectable, OnInit } from '@angular/core';
-import { Category } from './../models/category.model';
+import { Category } from '../../Admin/models/category.model';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class DataStorageService {
 
   private categories: any[] = [];

@@ -1,7 +1,4 @@
 import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { ReactiveFormsModule, FormsModule } from "@angular/forms";
-import { RouterModule } from "@angular/router";
 
 import { ProfileComponent } from "./components/profile/profile.component";
 import { SettingsComponent } from "./components/settings/settings.component";
@@ -13,6 +10,7 @@ import { SearchComponent } from "./components/search/search.component";
 import { AdminRoutingModule } from "./admin-routing.module";
 import { AdminHomePageComponent } from "./components/admin-home-page/admin-home-page.component";
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
+import { SharedModule } from '../Shared/shared.module';
 
 const adminComponents = [
   ProfileComponent,
@@ -27,10 +25,7 @@ const adminComponents = [
 @NgModule({
   declarations: [...adminComponents, AdminHomePageComponent],
   imports: [
-    CommonModule,
-    RouterModule,
-    FormsModule,
-    ReactiveFormsModule,
+    SharedModule,
     AdminRoutingModule
   ],
 })

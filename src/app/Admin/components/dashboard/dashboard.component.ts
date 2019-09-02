@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { LayoutService } from 'src/app/Shared/Services/layout.service';
-import { DataStorageService } from './../../services/data-storage.service';
+import { LayoutService } from 'src/app/Core/Services/layout.service';
+import { DataStorageService } from '../../../Core/services/data-storage.service';
 
 @Component({
   selector: 'app-dashboard',

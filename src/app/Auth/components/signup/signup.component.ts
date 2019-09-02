@@ -10,7 +10,7 @@ import {
 } from "@angular/forms";
 import { CustomValidators } from "src/app/Shared/Validators/custom-validators";
 import { Router } from "@angular/router";
-import { AuthService } from "../../services/auth.service";
+import { AuthService } from "../../../Core/services/auth.service";
 
 @Component({
   selector: "app-signup",
@@ -25,7 +25,7 @@ export class SignupComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private _authService: AuthService
-  ) {}
+  ) { }
 
   formErrors = {
     fullName: "",

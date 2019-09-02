@@ -1,13 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-server-home-page',
   templateUrl: './server-home-page.component.html',
   styleUrls: ['./server-home-page.component.css']
 })
-export class ServerHomePageComponent {
+export class ServerHomePageComponent implements OnInit {
   serverElements = [{ type: 'server', name: 'Testserver', content: 'Just a test!' }];
 
+  ngOnInit() {
+  }
   onServerAdded(serverData: { serverName: string, serverContent: string }) {
     this.serverElements.push({
       type: 'server',

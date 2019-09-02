@@ -15,6 +15,7 @@ import {
   ElementRef,
   ContentChild,
 } from '@angular/core';
+import { LayoutService } from 'src/app/Core/Services/layout.service';
 
 @Component({
   selector: 'app-server-element',
@@ -36,9 +37,11 @@ export class ServerElementComponent implements
   // @ViewChild('heading') header: ElementRef;
   // @ContentChild('contentParagraph') paragraph: ElementRef;
 
-  constructor() {
+  constructor(private _layoutService: LayoutService) {
     console.log('constructor called!');
   }
+
+
 
   ngOnChanges(changes: SimpleChanges) {
     console.log('ngOnChanges called!');
@@ -46,6 +49,7 @@ export class ServerElementComponent implements
   }
 
   ngOnInit() {
+    this._layoutService.setComponentTitleListener("Servers");
     console.log('ngOnInit called!');
     // console.log('Text Content: ' + this.header.nativeElement.textContent);
     // console.log('Text Content of paragraph: ' + this.paragraph.nativeElement.textContent);
